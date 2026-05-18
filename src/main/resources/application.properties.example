@@ -1,0 +1,5 @@
+spring.application.name=biblioteca-api
+
+spring.mongodb.uri=mongodb+srv://USUARIO:PASSWORD@cluster0.xxxxx.mongodb.net/biblioteca_db?retryWrites=true&w=majority
+
+server.port=8080
