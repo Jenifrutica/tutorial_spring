@@ -48,6 +48,4 @@ O ejecuta `BibliotecaApiiApplication` desde IntelliJ.
 
 Base URL: `http://localhost:8080`
 
-## Tutorial de referencia
 
-https://github.com/migueltovarb/TutorialApiRestSpringBoot
