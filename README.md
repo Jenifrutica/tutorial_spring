@@ -68,17 +68,4 @@ Como último paso de control, se consulta la lista global de libros por tercera 
 
 ![7. GET Lista Final](docs/images/7_get_lista_final.png)
 
----
 
-## Estructura de Datos (JSON de Ejemplo)
-
-Para las operaciones de inserción y modificación de datos, se maneja el header `Content-Type: application/json` con la siguiente estructura de ejemplo:
-
-```json
-{
-  "isbn": "978-8420674254",
-  "titulo": "Apuntes del subsuelo",
-  "autor": "Fiódor Dostoyevski",
-  "anioPublicacion": 1864,
-  "categoria": "Novela Filosófica / Existencialismo"
-}
