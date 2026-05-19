@@ -1,0 +1,98 @@
+{
+  "info": {
+    "name": "Biblioteca API",
+    "description": "CRUD de libros - API REST Spring Boot\n\nOrden sugerido:\n1. Crear libro (POST)\n2. Listar libros (GET)\n3. Consultar por ID (GET)\n4. Actualizar libro (PUT)\n5. Eliminar libro (DELETE)\n\nRequisito: ejecutar la API con `mvnw spring-boot:run` antes de probar.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "libroId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Crear libro",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"isbn\": \"978-0-13-468599-1\",\n  \"titulo\": \"Clean Code\",\n  \"autor\": \"Robert C. Martin\",\n  \"anioPublicacion\": 2008,\n  \"categoria\": \"Programación\"\n}"
+        },
+        "url": "{{baseUrl}}/api/libros",
+        "description": "Crea un libro. Guarda automáticamente el `id` en la variable `libroId` para las demás peticiones."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if (pm.response.code === 201) {",
+              "    const json = pm.response.json();",
+              "    pm.environment.set('libroId', json.id);",
+              "    pm.collectionVariables.set('libroId', json.id);",
+              "    console.log('libroId guardado:', json.id);",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Listar libros",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/libros",
+        "description": "Devuelve todos los libros registrados."
+      }
+    },
+    {
+      "name": "3. Consultar libro por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/libros/{{libroId}}",
+        "description": "Usa el id guardado al crear un libro. Si está vacío, ejecuta primero '1. Crear libro'."
+      }
+    },
+    {
+      "name": "4. Actualizar libro",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"isbn\": \"978-0-13-468599-1\",\n  \"titulo\": \"Clean Code - Edición revisada\",\n  \"autor\": \"Robert C. Martin\",\n  \"anioPublicacion\": 2008,\n  \"categoria\": \"Programación\"\n}"
+        },
+        "url": "{{baseUrl}}/api/libros/{{libroId}}",
+        "description": "Actualiza el libro con el id guardado en `libroId`."
+      }
+    },
+    {
+      "name": "5. Eliminar libro",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/libros/{{libroId}}",
+        "description": "Elimina el libro. Respuesta esperada: 204 No Content."
+      }
+    }
+  ]
+}
